@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.13)
+project(add)
+add_executable(add main.cpp)
+target_link_libraries(add customadder)
+install(TARGETS add DESTINATION bin) 
