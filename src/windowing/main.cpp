@@ -1,8 +1,10 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
+#include <window-config.h>
 
-int main()
+int main(int argc, char **argv)
 {
+    std::cout << argv[0] << "Version: " << WINDOW_VERSION_MAJOR << "." << WINDOW_VERSION_MINOR << "\n";
     std::cout << "Hello from window" << std::endl;
     GLFWwindow *window;
 

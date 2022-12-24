@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.13)
-project(window)
+project(window VERSION 1.0)
+configure_file(window-config.h.in window-config.h)
 add_executable(window main.cpp)
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
 if(APPLE)
     # Fix linking on 10.14+. See https://stackoverflow.com/questions/54068035
     target_link_directories(window PRIVATE /usr/local/lib)
