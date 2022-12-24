@@ -6,20 +6,28 @@
 int main(int c, char **argv)
 {
     int i = 1;
-    int sum = 0;
+    float sum = 0;
+    bool flag = 0;
     while (i < c)
     {
         std::string arg = argv[i];
         try
         {
             std::size_t pos;
-            int x = std::stoi(arg, &pos);
+            float x = std::stoi(arg, &pos);
             if (pos < arg.size())
             {
-                std::cerr << "Trailing characters after number: " << arg << '\n';
-                exit(1);
+                x = std::stof(arg, &pos);
+                if (pos < arg.size())
+                {
+                    std::cerr << "Trailing characters after number: " << arg << '\n';
+                    exit(1);
+                }
+                flag = 1;
+                sum = customadder69::add(sum, x);
             }
-            sum += x;
+            else
+                sum = customadder69::add(sum, x);
         }
         catch (const std::invalid_argument &e)
         {
@@ -33,7 +41,7 @@ int main(int c, char **argv)
         }
         i++;
     }
-
-    std::cout << sum << std::endl;
+    auto ans = flag ? sum : int(sum);
+    std::cout << ans << std::endl;
     return 0;
 }
