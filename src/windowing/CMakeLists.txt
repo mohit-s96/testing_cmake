@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.13)
+project(window)
+add_executable(window main.cpp)
+if(APPLE)
+    # Fix linking on 10.14+. See https://stackoverflow.com/questions/54068035
+    target_link_directories(window PRIVATE /usr/local/lib)
+ENDIF()
+add_subdirectory(../deps/glfw deps/glfw)
+target_include_directories(window PRIVATE ../../deps/glfw/include)
+target_link_directories(window PRIVATE deps/glfw/src)
+target_link_libraries(window glfw)
+install(TARGETS window DESTINATION bin) 
