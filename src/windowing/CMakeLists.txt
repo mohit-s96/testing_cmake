@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 3.13)
 project(window VERSION 1.0)
 add_executable(window main.cpp)
+
 # adder use logic
 option(USE_ADDER "addition of floats/integers." ON)
 if(USE_ADDER)
     add_subdirectory(../deps/adder deps/adder)
-    list(APPEND EXTRA_INCLUDES ../../deps/adder)
+    list(APPEND EXTRA_INCLUDES ../deps/adder)
     list(APPEND EXTRA_LIBS deps/adder)
+    list(APPEND EXTRA_LINKS customadder)
 endif()
 
 configure_file(window-config.h.in window-config.h)
@@ -23,7 +25,7 @@ endif()
 add_subdirectory(../deps/glfw deps/glfw)
 
 target_include_directories(${PROJECT_NAME} 
-    PUBLIC ../../deps/glfw/include
+    PUBLIC ../deps/glfw/include
     ${EXTRA_INCLUDES}
 )
 
@@ -32,6 +34,9 @@ target_link_directories(${PROJECT_NAME}
     ${EXTRA_LIBS}
 )
 
-target_link_libraries(window customadder glfw)
+target_link_libraries(${PROJECT_NAME} 
+    glfw
+    ${EXTRA_LINKS}
+)
 
 install(TARGETS window DESTINATION bin) 
