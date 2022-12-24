@@ -1,2 +1,4 @@
 #define WINDOW_VERSION_MAJOR @window_VERSION_MAJOR@
 #define WINDOW_VERSION_MINOR @window_VERSION_MINOR@
+
+#cmakedefine USE_ADDER

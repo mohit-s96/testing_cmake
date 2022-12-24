@@ -1,11 +1,24 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 #include <window-config.h>
+#include <string>
+#ifdef USE_ADDER
+#include "adder.h"
+#endif
 
 int main(int argc, char **argv)
 {
+    std::string s1 = argv[1];
+    std::string s2 = argv[2];
+    int n1 = std::stoi(s1);
+    int n2 = std::stoi(s2);
     std::cout << argv[0] << "Version: " << WINDOW_VERSION_MAJOR << "." << WINDOW_VERSION_MINOR << "\n";
     std::cout << "Hello from window" << std::endl;
+#ifdef USE_ADDER
+    std::cout << "Using adder: " << customadder69::add(n1, n2) << "\n";
+#else
+    std::cout << "Not using adder: " << n1 + n2 << "\n";
+#endif
     GLFWwindow *window;
 
     if (!glfwInit())
