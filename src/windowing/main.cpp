@@ -2,14 +2,28 @@
 #include <GLFW/glfw3.h>
 #include <window-config.h>
 #include <string>
+#include <stdexcept>
 #ifdef USE_ADDER
 #include "adder.h"
 #endif
 
 int main(int argc, char **argv)
 {
-    std::string s1 = argv[1];
-    std::string s2 = argv[2];
+    std::string s1 = "";
+    std::string s2 = "";
+    try
+    {
+        if (argc < 3)
+            throw std::invalid_argument("Not enough arguments were passed to the program\n");
+        s1 = argv[1];
+        s2 = argv[2];
+    }
+    catch (const std::invalid_argument &e)
+    {
+        std::cerr << e.what() << '\n';
+        s1 = "0";
+        s2 = "0";
+    }
     int n1 = std::stoi(s1);
     int n2 = std::stoi(s2);
     std::cout << argv[0] << "Version: " << WINDOW_VERSION_MAJOR << "." << WINDOW_VERSION_MINOR << "\n";
